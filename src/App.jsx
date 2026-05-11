@@ -6,6 +6,7 @@ import {
   ChevronDown,
   Cpu,
   DollarSign,
+  BookOpen,
   Monitor,
   ShieldAlert,
   Sparkles,
@@ -115,13 +116,68 @@ const cardBase = {
   boxShadow: '0 30px 80px rgba(2, 6, 23, 0.45)',
 }
 
+const footerReferences = [
+  'Bijker, W. E., & Pinch, T. J. (1987). The social construction of technological systems.',
+  'Jenkins, H. (2006). Convergence culture.',
+  'Pariser, E. (2011). The filter bubble.',
+  'Turkle, S. (2011). Alone together.',
+  'van Dijck, J. (2013). The culture of connectivity.',
+]
+
 function App() {
   const [activePart, setActivePart] = useState(anatomyParts[0].id)
+  const [showRefs, setShowRefs] = useState(false)
   const selectedPart = anatomyParts.find((part) => part.id === activePart) ?? anatomyParts[0]
 
   return (
     <div style={page}>
-      <main style={shell}>
+      <header
+        style={{
+          position: 'fixed',
+          inset: '0 0 auto 0',
+          zIndex: 20,
+          borderBottom: '1px solid rgba(148, 163, 184, 0.16)',
+          background: 'rgba(2, 6, 23, 0.68)',
+          backdropFilter: 'blur(18px)',
+        }}
+      >
+        <div
+          style={{
+            width: 'min(1180px, calc(100% - 32px))',
+            margin: '0 auto',
+            minHeight: 72,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 16,
+            color: '#e2e8f0',
+            fontSize: 13,
+            letterSpacing: '0.04em',
+            textTransform: 'uppercase',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, minWidth: 0 }}>
+            <div
+              style={{
+                width: 10,
+                height: 10,
+                borderRadius: 999,
+                background: '#38bdf8',
+                boxShadow: '0 0 18px rgba(56, 189, 248, 0.6)',
+                flexShrink: 0,
+              }}
+            />
+            <span style={{ color: '#f8fafc', whiteSpace: 'nowrap' }}>
+              ISTEC | História da Ciência e das Técnicas
+            </span>
+          </div>
+          <div style={{ color: '#cbd5e1', whiteSpace: 'nowrap', textAlign: 'right' }}>
+            Paulo Silva &amp; Francisco Rebelo | Abril 2026
+          </div>
+        </div>
+      </header>
+
+      <main style={{ ...shell, paddingTop: 104, paddingBottom: 72 }}>
         <motion.section
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -603,6 +659,165 @@ function App() {
             </div>
           </div>
         </motion.section>
+
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+          style={{ marginTop: 28 }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 18 }}>
+            <div
+              style={{
+                width: 10,
+                height: 10,
+                borderRadius: 999,
+                background: '#22c55e',
+                boxShadow: '0 0 24px rgba(34, 197, 94, 0.45)',
+              }}
+            />
+            <h2
+              style={{
+                margin: 0,
+                color: '#f8fafc',
+                fontSize: '1.65rem',
+                letterSpacing: '-0.04em',
+              }}
+            >
+              Considerações Finais
+            </h2>
+          </div>
+
+          <motion.div
+            whileHover={{ y: -2 }}
+            transition={{ duration: 0.24, ease: 'easeOut' }}
+            style={{
+              ...cardBase,
+              borderRadius: 28,
+              padding: '28px',
+              position: 'relative',
+              overflow: 'hidden',
+            }}
+          >
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background:
+                  'linear-gradient(135deg, rgba(34, 197, 94, 0.08), transparent 35%, rgba(56, 189, 248, 0.06))',
+                pointerEvents: 'none',
+              }}
+            />
+            <div style={{ position: 'relative', display: 'grid', gap: 14 }}>
+              <div
+                style={{
+                  color: '#22c55e',
+                  fontSize: 13,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.18em',
+                }}
+              >
+                SCOT, Bijker & Pinch, 1987
+              </div>
+              <p style={{ margin: 0, color: '#e2e8f0', lineHeight: 1.85, fontSize: '1.02rem' }}>
+                A análise desenvolvida neste trabalho assentou na teoria SCOT (Social Construction
+                of Technology), proposta por Bijker e Pinch em 1987, para demonstrar que o
+                smartphone não é um objeto neutro, mas sim um artefacto socialmente construído.
+                A sua história revela tensões entre democratização e exclusão, entre autenticidade e
+                performance, e entre convergência e fragmentação, mostrando que cada avanço técnico
+                reorganiza práticas, valores e desigualdades.
+              </p>
+            </div>
+          </motion.div>
+        </motion.section>
+
+        <motion.footer
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+          style={{ marginTop: 28 }}
+        >
+          <div
+            style={{
+              ...cardBase,
+              borderRadius: 28,
+              padding: '24px',
+            }}
+          >
+            <button
+              type="button"
+              onClick={() => setShowRefs((current) => !current)}
+              style={{
+                appearance: 'none',
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: 16,
+                border: '1px solid rgba(148, 163, 184, 0.16)',
+                borderRadius: 22,
+                background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(2, 6, 23, 0.9))',
+                color: '#f8fafc',
+                padding: '16px 18px',
+                cursor: 'pointer',
+                boxShadow: '0 16px 36px rgba(2, 6, 23, 0.28)',
+              }}
+            >
+              <span style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: '1rem' }}>
+                <BookOpen size={18} />
+                Ver Referências Bibliográficas
+              </span>
+              <ChevronDown
+                size={18}
+                style={{
+                  color: '#94a3b8',
+                  transform: showRefs ? 'rotate(180deg)' : 'rotate(0deg)',
+                  transition: 'transform 220ms ease',
+                }}
+              />
+            </button>
+
+            <AnimatePresence>
+              {showRefs ? (
+                <motion.div
+                  initial={{ opacity: 0, height: 0, y: -8 }}
+                  animate={{ opacity: 1, height: 'auto', y: 0 }}
+                  exit={{ opacity: 0, height: 0, y: -8 }}
+                  transition={{ duration: 0.28, ease: 'easeOut' }}
+                  style={{ overflow: 'hidden' }}
+                >
+                  <div
+                    style={{
+                      marginTop: 16,
+                      padding: '18px 18px 8px',
+                      borderRadius: 22,
+                      background: 'rgba(15, 23, 42, 0.62)',
+                      border: '1px solid rgba(148, 163, 184, 0.12)',
+                      display: 'grid',
+                      gap: 12,
+                    }}
+                  >
+                    {footerReferences.map((reference) => (
+                      <div
+                        key={reference}
+                        style={{
+                          color: '#cbd5e1',
+                          lineHeight: 1.7,
+                          paddingBottom: 10,
+                          borderBottom: '1px solid rgba(148, 163, 184, 0.08)',
+                        }}
+                      >
+                        {reference}
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              ) : null}
+            </AnimatePresence>
+          </div>
+        </motion.footer>
       </main>
     </div>
   )
