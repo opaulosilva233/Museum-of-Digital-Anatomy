@@ -1,0 +1,13 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5173:5173"
+    volumes:
+      # Mount the project source so Vite HMR reflects local edits immediately.
+      - .:/app
+      # Keep container-managed dependencies isolated from the host node_modules.
+      - /app/node_modules
+    command: npm run dev -- --host
