@@ -10,4 +10,4 @@ services:
       - .:/app
       # Keep container-managed dependencies isolated from the host node_modules.
       - /app/node_modules
-    command: npm run dev -- --host
+    command: sh -c "npm ci && npm run dev -- --host"
