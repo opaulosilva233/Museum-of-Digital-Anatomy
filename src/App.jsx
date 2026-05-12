@@ -1,56 +1,120 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-
-const pedestals = [
-  { year: '1973', desc: 'Protótipo DynaTAC de 1,1kg' },
-  { year: '2007', desc: 'A rutura do iPhone' },
-  { year: '2024', desc: 'Era do 5G e IA' },
-]
-
 export default function App() {
   return (
-    <div className="min-h-screen text-white bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-800 via-slate-950 to-black relative overflow-hidden">
+    <div className="min-h-screen bg-[#0a0f1a] font-sans text-white overflow-x-hidden">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-[#0a0f1a]/60 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-8 lg:px-10">
+          <div className="flex items-center gap-3">
+            <span className="h-2.5 w-2.5 rounded-full bg-sky-400 shadow-[0_0_18px_rgba(56,189,248,0.85)]" />
+            <p className="text-[11px] uppercase tracking-[0.28em] text-gray-400">
+              ISTEC | História da Ciência e das Técnicas
+            </p>
+          </div>
 
-      {/* Header Académico (Glassmorphism) */}
-      <header className="fixed w-full z-50 top-0 left-0">
-        <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between bg-slate-900/50 backdrop-blur-md border-b border-white/10">
-          <div className="text-slate-300 text-sm">ISTEC | História da Ciência e das Técnicas</div>
-          <div className="text-white font-bold tracking-widest text-lg">MUSEU DA ANATOMIA DIGITAL</div>
-          <div className="text-slate-300 text-sm">Paulo Silva &amp; Francisco Rebelo</div>
+          <p className="text-[11px] uppercase tracking-[0.28em] text-gray-400 text-right">
+            Paulo Silva &amp; Francisco Rebelo | Abril 2026
+          </p>
         </div>
       </header>
 
-      <main className="pt-24 px-6">
-        {/* O Átrio - Linha do Tempo */}
-        <section className="max-w-7xl mx-auto mb-12">
-          <h2 className="text-3xl font-semibold mb-6 text-slate-100">O Átrio</h2>
-
-          <div className="flex gap-6 overflow-x-auto py-4 pb-8">
-            {pedestals.map((p, i) => (
-              <motion.div
-                key={p.year}
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6, delay: i * 0.08 }}
-                className="relative p-8 rounded-xl bg-white/5 backdrop-blur-lg border border-cyan-500/30 shadow-[0_0_30px_rgba(6,182,212,0.15)] hover:shadow-[0_0_40px_rgba(6,182,212,0.4)] transition-all duration-500 min-w-[260px]"
+      <main className="relative pt-24 sm:pt-28">
+        <section className="mx-auto mt-24 max-w-5xl px-6 sm:px-8 lg:px-10">
+          <div className="rounded-3xl border border-white/5 bg-gradient-to-br from-[#111827] to-[#0f172a] p-8 shadow-[0_24px_80px_rgba(0,0,0,0.45)] sm:p-10 lg:p-12">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[11px] uppercase tracking-[0.24em] text-gray-300">
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                className="h-4 w-4 text-sky-400"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
-                <div className="text-cyan-400 font-bold text-2xl drop-shadow-[0_0_10px_rgba(6,182,212,0.8)]">{p.year}</div>
-                <p className="mt-3 text-slate-200 text-sm">{p.desc}</p>
-              </motion.div>
-            ))}
+                <circle cx="12" cy="12" r="2.2" />
+                <ellipse cx="12" cy="12" rx="8.5" ry="3.5" />
+                <ellipse cx="12" cy="12" rx="8.5" ry="3.5" transform="rotate(60 12 12)" />
+                <ellipse cx="12" cy="12" rx="8.5" ry="3.5" transform="rotate(-60 12 12)" />
+              </svg>
+              <span>Museu da Anatomia Digital</span>
+            </div>
+
+            <div className="mt-8 max-w-4xl">
+              <h1 className="mb-4 text-5xl font-bold tracking-tight text-white sm:text-6xl">
+                Museu da Anatomia Digital
+              </h1>
+              <p className="max-w-3xl text-lg leading-relaxed text-gray-400">
+                Uma leitura crítica do smartphone como objeto histórico, interface cultural e artefacto sociotécnico. Aqui, o dispositivo não é neutro: ele acumula mercado, atenção, imagem e desigualdade.
+              </p>
+            </div>
           </div>
         </section>
 
-        {/* Espaço reservado para a Mesa de Autópsia */}
-        {/* TODO: Mesa de Autópsia — inserir aqui o componente da mesa/interação */}
+        {/* Secção: O Átrio do Museu */}
+        <section className="max-w-5xl mx-auto px-8 pb-24 mt-24">
+          {/* Cabeçalho da Secção */}
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-2.5 h-2.5 rounded-full bg-cyan-500"></div>
+            <h2 className="text-2xl font-bold text-white">O Átrio do Museu</h2>
+            <span className="text-sm text-gray-500 ml-2">Linha do Tempo - Fase 1</span>
+          </div>
 
+          {/* Contentor da Linha do Tempo */}
+          <div className="bg-[#0f1523] border border-white/5 rounded-[2rem] p-8 md:p-12 relative shadow-xl">
+            {/* Linha vertical decorativa (escondida em mobile, visível em md) */}
+            <div className="hidden md:block absolute left-[4.5rem] top-16 bottom-16 w-px bg-white/10"></div>
+
+            <div className="space-y-12">
+              {/* Item 1: 1973 */}
+              <div className="relative flex flex-col md:flex-row gap-6 md:gap-12">
+                <div className="md:w-32 flex-shrink-0 pt-1">
+                  <div className="flex items-center gap-3">
+                    <div className="w-3 h-3 rounded-full border-2 border-cyan-500 bg-[#0f1523] relative z-10 hidden md:block"></div>
+                    <span className="text-cyan-400 font-mono font-bold tracking-widest">1973</span>
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-2">A Era dos Tijolos</h3>
+                  <p className="text-gray-400 leading-relaxed">
+                    O protótipo DynaTAC da Motorola inaugura a fantasia da mobilidade, mas pesa 1,1 kg e ainda pertence ao mundo industrial do objeto massivo.
+                  </p>
+                </div>
+              </div>
+
+              {/* Item 2: 2007 */}
+              <div className="relative flex flex-col md:flex-row gap-6 md:gap-12">
+                <div className="md:w-32 flex-shrink-0 pt-1">
+                  <div className="flex items-center gap-3">
+                    <div className="w-3 h-3 rounded-full border-2 border-cyan-500 bg-[#0f1523] relative z-10 hidden md:block"></div>
+                    <span className="text-cyan-400 font-mono font-bold tracking-widest">2007</span>
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-2">A Rutura</h3>
+                  <p className="text-gray-400 leading-relaxed">
+                    O iPhone junta telefone, iPod e internet num só ecrã touch, reorganizando a experiência técnica, cultural e de mercado. O browsing torna-se a "killer app".
+                  </p>
+                </div>
+              </div>
+
+              {/* Item 3: 2024 */}
+              <div className="relative flex flex-col md:flex-row gap-6 md:gap-12">
+                <div className="md:w-32 flex-shrink-0 pt-1">
+                  <div className="flex items-center gap-3">
+                    <div className="w-3 h-3 rounded-full border-2 border-cyan-500 bg-[#0f1523] relative z-10 hidden md:block"></div>
+                    <span className="text-cyan-400 font-mono font-bold tracking-widest">2024</span>
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-2">O Presente e a IA</h3>
+                  <p className="text-gray-400 leading-relaxed">
+                    O 5G consolida-se com 1,5 mil milhões de ligações e a Inteligência Artificial passa a correr localmente. O dispositivo afirma-se como infraestrutura essencial.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
-
-      {/* Ambient glow / reflexos de luz para atmosfera 3D/Cyberpunk */}
-      <div className="pointer-events-none absolute inset-0 mix-blend-screen opacity-30">
-        <div className="absolute top-12 left-1/4 w-96 h-96 bg-gradient-to-tr from-cyan-500/20 to-transparent rounded-full filter blur-3xl" />
-        <div className="absolute top-40 right-1/4 w-72 h-72 bg-gradient-to-br from-pink-500/10 to-transparent rounded-full filter blur-2xl" />
-      </div>
     </div>
   )
 }
