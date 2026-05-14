@@ -1,12 +1,16 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom'
 import Home from './pages/Home'
 import Museum from './pages/Museum'
 import Autopsy from './pages/Autopsy'
 
-export default function App() {
+function Shell() {
+  const location = useLocation()
+  const hideHeader = location.pathname === '/'
+  const shellPadding = hideHeader ? 'pb-0' : 'pb-20'
+
   return (
-    <Router>
-      <div className="min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black text-white overflow-x-hidden pb-20">
+    <div className={`min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black text-white overflow-x-hidden ${shellPadding}`}>
+      {!hideHeader && (
         <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black/30 backdrop-blur-md">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-8 lg:px-10">
             <div className="flex items-center gap-3">
@@ -21,15 +25,23 @@ export default function App() {
             </nav>
           </div>
         </header>
+      )}
 
-        <main className="relative pt-28 sm:pt-32">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/museu" element={<Museum />} />
-            <Route path="/autopsia" element={<Autopsy />} />
-          </Routes>
-        </main>
-      </div>
+      <main className={hideHeader ? 'relative' : 'relative pt-28 sm:pt-32'}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/museu" element={<Museum />} />
+          <Route path="/autopsia" element={<Autopsy />} />
+        </Routes>
+      </main>
+    </div>
+  )
+}
+
+export default function App() {
+  return (
+    <Router>
+      <Shell />
     </Router>
   )
 }
